@@ -1,2 +1,2 @@
 # RunPE-Shield
-Detects processes created with a RunPE.
+Detects malicious processes created with a RunPE.
