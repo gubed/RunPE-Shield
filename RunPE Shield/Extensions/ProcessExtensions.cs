@@ -8,7 +8,7 @@ namespace RunPE_Shield.Extensions
     public static class ProcessExtension
     {
         [Flags]
-        public enum ThreadAccess : int
+        public enum ThreadAccess 
         {
             TERMINATE = (0x0001),
             SUSPEND_RESUME = (0x0002),
@@ -47,19 +47,26 @@ namespace RunPE_Shield.Extensions
         }
         public static bool Is64Bit(this Process process)
         {
-
             try
             {
-                ProcessModule handle = process.MainModule;
+                try
+                {
+                    ProcessModule handle = process.MainModule;
+                }
+                catch (Exception)
+                {
+                    return true;
+                }
+                bool isWow64;
+                if (!IsWow64Process(process.Handle, out isWow64))
+                    throw new Win32Exception();
+                return !isWow64;
             }
             catch (Exception)
             {
                 return true;
             }
-            bool isWow64;
-            if (!IsWow64Process(process.Handle, out isWow64))
-                throw new Win32Exception();
-            return !isWow64;
+            
         }
 
 

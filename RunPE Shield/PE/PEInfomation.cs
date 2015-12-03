@@ -1,13 +1,7 @@
-﻿using PEToolkit.PE.Structures;
-using RunPE_Shield.PE.Structures;
+﻿using RunPE_Shield.PE.Structures;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace RunPE_Shield.PE
 {
@@ -16,7 +10,7 @@ namespace RunPE_Shield.PE
 
         public string PESource { get; set; }
         public bool IsProcess { get; private set;}
-        public IntPtr ModuleBaseAddress { get; private set; }
+        public IntPtr ModuleBaseAddress { get; }
 
         public int ProcessID;
         public string FilePath;
@@ -29,7 +23,6 @@ namespace RunPE_Shield.PE
         public IMAGE_DATA_DIRECTORIES DataDirectories;
         public IMAGE_SECTION_HEADER[] Sections;
         public IMAGE_OVERVIEW Overview;
-        //public MODULE_INFO ModuleInfo;
 
         public const int SizeOfDosHeader = 0x40;
         public const int SizeOfFileHeader = 0x18;
@@ -138,9 +131,5 @@ namespace RunPE_Shield.PE
         private static extern bool FreeLibrary(IntPtr handle);
         [DllImport("psapi.dll")]
         private static extern uint GetModuleFileNameEx(IntPtr hProcess, IntPtr hModule, StringBuilder lpBaseName, int nSize);
-        [DllImport("psapi.dll", SetLastError =true)]
-        private static extern bool GetModuleInformation(IntPtr handle, IntPtr module, out MODULE_INFO inf, int cb);
-        [DllImport("kernel32.dll")]
-        private static extern bool GetModuleHandleEx(uint flags, StringBuilder address, out IntPtr handle);
     }
 }

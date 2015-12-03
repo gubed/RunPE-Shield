@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RunPE_Shield.PE.Structures
+﻿namespace RunPE_Shield.PE.Structures
 {
     public struct IMAGE_OVERVIEW
     {
